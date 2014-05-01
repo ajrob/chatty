@@ -7,7 +7,7 @@
 	<div class="jumbotron">
 		<div class="list-group-item" ng-repeat="message in messages">{{ message.message }}</div>
 	</div>
-	<form ng-submit="addMessage(userMessage)">
-		<input type="text" class="form-control" placeholder="Enter message" ng-model="userMessage" >
+	<form ng-submit="addMessage()">
+		<input type="text" class="form-control" placeholder="Enter message" ng-model="userMessage" />
 	</form>
 </div>

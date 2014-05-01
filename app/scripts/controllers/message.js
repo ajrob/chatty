@@ -5,7 +5,11 @@ angular.module('chattyApp')
     $scope.messages = MessageService.getMessages().then(function(data){
     	$scope.messages = data;
     });
-    $scope.addMessage = function(message){
-    	MessageService.addMessage(message);
-    } 
-  });
+
+    $scope.addMessage = function(){
+    	MessageService.addMessage($scope.userMessage).then(function(data){
+    		$scope.messages = data;
+    		$scope.userMessage = '';
+    	})
+    };
+	});

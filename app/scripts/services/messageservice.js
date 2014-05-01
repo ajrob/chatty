@@ -12,13 +12,16 @@ angular.module('chattyApp')
 	    	return deferred.promise;
 	    },
 	    addMessage: function(message){
-	    	var formedMessage = { "message": message };
-	    	console.log(formedMessage);
+	    	var deferred = $q.defer();
+	    	var formedMessage = { message: message };
 	    	$http({
 	    		method: 'POST',
 	    		url: 'http://localhost:3000/',
 	    		data: formedMessage
+	    	}).success(function(data){
+	    		deferred.resolve(data);
 	    	});
+	    	return deferred.promise;
 	    }
     }
   });

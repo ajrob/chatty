@@ -1,3 +1,33 @@
+// var express = require('express')
+// var bodyParser = require('body-parser')
+
+// var app = express()
+
+// app.use(function(req, res, next){
+// 	res.setHeader('Access-Control-Allow-Origin', '*');
+// 	next();
+// })
+// app.use(bodyParser())
+
+// var messages = [
+// 	{ message: "Message one" },
+// 	{ message: "Message two" }
+// ]
+
+// app.get('/', function(req, res){
+// 	res.json(200, messages)	
+// })
+
+// app.post('/', function(req, res){
+// 	var message = req.body;
+// 	messages.push(message);
+// 	res.json(201, messages);
+// })
+
+// app.listen(3000, function(){
+// 	console.log('Listening...');
+// })
+
 var http = require('http');
 var port = 3000;
 var messages = [
@@ -14,6 +44,7 @@ onRequest = function(request, response){
 		});
 		response.end(JSON.stringify(messages));
 	}
+
 	if (request.method == 'POST') {
 		var postData = '';
 		request.on('data', function(chunk) {
@@ -24,12 +55,15 @@ onRequest = function(request, response){
 			console.log(JSON.parse(postData));
 			messages.push(JSON.parse(postData));
 			console.log(messages);
+			response.writeHead(200, {
+				'Connection': 'close',
+				'Content-Type': 'application/JSON',
+				'Access-Control-Allow-Origin': '*'
+			});
+			response.end(JSON.stringify(messages));
 		});
-		response.writeHead(200, {
-			'Connection': 'close'
-		});
-		response.end("Push succesful!");
 	}
+
 	if (request.method == 'OPTIONS') {
 		response.writeHead(200, {
 			'Connection': 'close',
