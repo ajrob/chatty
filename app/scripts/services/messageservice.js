@@ -13,7 +13,7 @@ angular.module('chattyApp')
 	    },
 	    addMessage: function(message){
 	    	var deferred = $q.defer();
-	    	var formedMessage = { message: message };
+	    	var formedMessage = { message: message, timestamp: '' };
 	    	$http({
 	    		method: 'POST',
 	    		url: 'http://localhost:3000/',

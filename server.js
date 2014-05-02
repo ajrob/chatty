@@ -29,11 +29,21 @@
 // })
 
 var http = require('http');
+var util = require('util');
 var port = 3000;
 var messages = [
-	{ message: "I'm not telling" },
-	{ message: "Adorbs!!" }
+	{ message: "I'm not telling", timestamp: getTimeStamp() },
+	{ message: "Adorbs!!", timestamp: getTimeStamp() }
 ];
+
+function getTimeStamp () {
+	return new Date();
+}
+
+function formMessage (message){
+	message.timestamp = getTimeStamp();
+	return message;
+}
 
 onRequest = function(request, response){
 	if(request.method == 'GET'){
@@ -53,7 +63,7 @@ onRequest = function(request, response){
 		request.on('end', function() {
 			console.log("Got POST data:");
 			console.log(JSON.parse(postData));
-			messages.push(JSON.parse(postData));
+			messages.push(formMessage(JSON.parse(postData)));
 			console.log(messages);
 			response.writeHead(200, {
 				'Connection': 'close',

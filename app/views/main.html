@@ -5,7 +5,9 @@
 	
 	<h4>Latest Chats:</h4>
 	<div class="jumbotron">
-		<div class="list-group-item" ng-repeat="message in messages">{{ message.message }}</div>
+		<div class="list-group-item" ng-repeat="message in messages">{{ message.message }}
+			<div><small>{{ message.timestamp }}</small></div>
+		</div>
 	</div>
 	<form ng-submit="addMessage()">
 		<input type="text" class="form-control" placeholder="Enter message" ng-model="userMessage" />
